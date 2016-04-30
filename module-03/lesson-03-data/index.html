@@ -17,7 +17,131 @@
 
 <script>
 /* JavaScript code goes here! */
-
+    
+    console.log("hello map"); // example of string type value
+    
+    console.log(5+5); // example of numeric type value, which, with the addition of an operator, becomes an expression.
+    
+    console.log(true); // example of boolean type value
+    
+     var x = 5;         // assign the value 5 to x
+     var y = 2;         // assign the value 2 to y
+     var z = x + y;     // assign the value 7 to z (x + y) 
+    
+    console.log(z);     // Javascript operator lesson from w3schools
+    
+    // comparison operators
+    console.log(5 < 8); // evaluates to true
+    console.log(5 > 8); // evaluates to false
+    console.log(5 == 8); // evaluates to false
+    console.log(5 != 8); // evaluates to true
+    
+    console.log("My name is "+ "Vinz Clortho, "+ "Keymaster of Gozer"); //example of string type concatenation
+    
+    console.log(5 + "8"); // output is 58, example of type conversion
+    
+    // In concatenation, the operator converts numeric type to string type
+    console.log(5 + "hello map"); // output is a string value "5hello map", example of type conversion error
+    
+    // comparison operators and conversion types. In comparisons, strings become numbers
+    console.log(5 < "8"); // output is true
+    console.log(5 > "8"); // output is false
+    console.log(5 == "5"); // output is true!?!?!
+    
+    console.log(5 === "5"); // output is false // use triple equals for compaison of string versus numeric
+    
+    // Using logical operators
+    console.log(1 < 2 && 2 < 3); // output is true because 1 < 2 and 2 < 3
+    console.log(1 < 2 && 2 > 3); // output is false because the second statement (2 >3) is not true
+    console.log(1 < 2 || 2 > 3); // output is true because only one of the statements need be true
+    
+    // Using the NOT operator
+    console.log(!true); // output is false
+    console.log(1 != 2); // output is true because 1 is NOT 2
+    console.log(1 != 1); // output is false because 1 is 1
+    
+    // assignment operators (=), as opposed to comparison operators using equal signs (==, ===)
+    var city = "Frankfort";     
+    var state = "Kentucky";
+    console.log(city,", ",state);
+    
+    // Expressions to variable names
+    var total1 = 15 + 20;
+    console.log(total1);
+    var value1 = 30;
+    var value2 = 60;
+    var total2 = value1 + value2;
+    console.log(total2);
+    var average = total1/total2;
+    console.log(average);
+    
+    // Dynamically typed variables
+    var year = 2015;
+    console.log(year);  // year references the number 2015
+    var year = year + 1;
+    console.log(year);  // year now references the number 2016
+    
+    // Expressions with multiple data types
+    var cityPop = 308428;
+    console.log("The population of Lexington is ",cityPop);
+    
+    // One can change variables from console, but refreshing returns them to their coded state (Frankfort/BG eg)
+    
+    // Array examples    
+    var cities = []; // creates an empty Array
+    console.log(cities);
+    
+    var cities = ["Frankfort", "Louisville", "Lexington"];
+    console.log(cities);
+    
+    var populations = [25527, 756832, 308428];
+    console.log(populations);
+    
+    var populations = ["Frankfort", 756832, false];
+    console.log(populations);
+    
+    var twoDArray = [
+        ["Frankfort", "Louisville", "Lexington"],
+        [25527, 756832, 308428],
+        ["Frankfort", 756832, false]
+    ];
+    
+    // Accessing array data
+    var cities = ["Frankfort", "Louisville", "Lexington"];
+    console.log(cities[0]); // outputs the String "Frankfort"
+    console.log(twoDArray);
+    
+    var cities = ["Frankfort", "Louisville", "Lexington"];
+    console.log(cities[0]); // outputs the String "Frankfort"
+    console.log(cities[1]); // outputs the String "Louisville"
+    console.log(cities[2]); // outputs the String "Lexington"
+    console.log(cities[3]); // outputs undefined
+    
+    // Accessing nested array data
+    var twoDArray = [
+        ["Frankfort", "Louisville", "Lexington"],
+        [25527, 756832, 308428],
+        ["Frankfort", 756832, false]
+    ];
+    console.log(twoDArray[0][2]); // output will be Lexington
+    console.log(twoDArray[2][1]); // output will be 756832
+    
+    // Updating array values
+    var years = [2010, 2011, 2022, 2013, 2014,2015];
+    console.log(years);
+    years[2] = 2012;
+    console.log(years); // we can see that the array has been updated!
+    
+    // Inputting values to empty array
+    var counties = [];
+    console.log(counties);  // output is an empty Array
+    counties[0] = "Adair";
+    console.log(counties); // output is a single item Array ["Adair"]
+    counties[1] = "Allen";
+    
+    counties[5] = "Anderson";
+    console.log(counties); // what is this output?  
+    console.log(counties); // output is now ["Adair", "Allen"]  
 </script>
     
 </body>
