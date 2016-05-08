@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 04 Starter Template</title>
+    <title>Lab 04 Awesomeness</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -51,15 +51,15 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Three Kenyan Cities</h1>
+        <h2>With Name, Population, and Factoid Information</h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
+        <p>Map authored by Paul Puckett</p>
+        <p>Click on the blue markers to reveal Name, Population, and Capital information about three Kenyan cities.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl. Vestibulum commodo imperdiet lacus, sed facilisis erat placerat sit amet. Nulla consequat malesuada neque eget aliquet. Integer non convallis nisl, gravida ultrices ex. Fusce nec vestibulum elit. Sed elementum lectus ipsum, vulputate elementum ex laoreet a. Aenean eu ex varius, varius felis vitae, efficitur nulla. Quisque pretium laoreet ante, in sodales dui vehicula at. Mauris eu sem sapien.
         </p>
     </footer>
@@ -69,8 +69,8 @@
         var targetDiv = 'map';
 
         var options = {
-            center: [0, 0],
-            zoom: 2
+            center: [-0.0236, 37.9062], // Center map on Kenya
+            zoom: 6 // Zoom to Kenya
         }
         map = L.map(targetDiv, options);
         var tiles = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
@@ -80,21 +80,38 @@
         
         // begin writing/editing Lab 04 code here
         
+        var cities = ["Nairobi", "Mombasa", "Lodwar"]; // Array containing Kenyan city names
+        
+        // 2d array containing the coordinates of the cities. Be careful, we're near the equator!
+        var cityCoords = [
+            [-1.283, 36.817],
+            [-4.055, 39.664],
+            [3.116667, 35.6]
+        ];
+        
+        var cityPops = [2750547, 799668, 48316]; // Array containing population values
+        
+        var cityCapital = [true, false, false]; // Array containing capital boolean info relative to cities array
+        
+        var cityComments = ["Kenya's Largest City", "Kenya's Largest Port", "Located Near the Great Rift Valley"];
 
-//        for(/* add code here */) {
-//            
-//            var popup = "<b>"+/* add code here */+"</b><br>"
-//                            +"<b>population</b>: "+/* add code here */;
-//
-//            if(/* add code here */) {
-//               
-//                popup += "<br>Is the capital city."; 
-//                
-//            } 
-//            
-//            L.marker(/* add code here */).addTo(map)
-//                .bindPopup(popup);
-//        }
+        // FOR loop to cycle through cities array, report name/population, and test for capital (true/false)
+        for(i=0; i < cities.length; i++) {
+            
+            var popup = "<b>"+cities[i]+"</b><br>"
+                            +"<b>"+cityComments[i]+"</b><br>"
+                            +"<b>Population</b>: "+cityPops[i];
+
+            if(cityCapital[i] == true) {
+               
+                popup += "<br><b>Is the capital city.</b>"; 
+                
+            } 
+            
+            // Draw from 2d array cityCoords to add markers to map
+            L.marker(cityCoords[i]).addTo(map)
+                .bindPopup(popup);
+        }
         
         // end writing/editing Lab 04 code here
         
