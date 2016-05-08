@@ -18,6 +18,155 @@
 <script>
 /* JavaScript code goes here! */
 
+    // Javascript properties .length dot notation example
+    var cities = ["Frankfort", "Louisville", "Lexington"];
+    console.log(cities.length);  // output will be 3
+    var years = [2011, 2012, 2013, 2014, 2015, 2016];
+    var yearsNum = years.length;
+    console.log(yearsNum); // output will be 6
+    
+    // Control structure FOR loop example
+    console.log("before the for loop");
+    for (var i = 0; i < 5; i++) {
+        console.log(i); // outputs numbers from 0 to 4
+    }
+    console.log("after the for loop");
+    
+    // Control structure FOR loop example with number rather than i
+    console.log("before the for loop");
+    for (var number = 0; number < 5; number = number + 1) {
+        console.log(number); // outputs numbers from 0 to 4
+    }
+    console.log("after the for loop");
+    
+    // FOR loop to output counter value followed by array value for that index position
+    var cities = ["Frankfort", "Louisville", "Lexington"];
+    for (var i = 0; i < cities.length; i++) {
+        console.log(i); // output the current value of i
+        console.log(cities[i]); // use i to access an index of the Array
+    }
+    
+    // FOR loop example to fill array with integers, and output those values
+    var newArray = []; // define an empty Array
+    for(var i = 0; i < 10; i++) {
+        newArray[i] = i + 1;
+    }
+    console.log(newArray); // output will be [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    
+    // nested loop example - for every outer loop iteration, inner loop runs completely
+    for (var i = 0; i < 5; i++) {
+        console.log('outer loop: ' + i);
+        for (var j = 0; j < 5; j++) {
+            console.log('inner loop: '+ j);
+        }
+    }
+    
+    // Flow of execution FOR loop math question
+    var sum = 0;
+    for (var i = 0; i < 5; i++) {
+        for (var j = 0; j < 5; j++) {
+            sum += j;
+        }
+        sum += i;
+    }
+    console.log(sum);  // output will be 60.
+    
+    // Example of WHILE loop
+    var cities = ["Frankfort", "Louisville", "Lexington"];
+    var i = 0;
+    while (i < cities.length){  // Note use of dot notation for interrupt value
+        console.log(i);
+        console.log(cities[i]);
+        i++     
+    }
+    
+    // if/else statement example 1 (evaluates true and logs freezing statement)
+    var temp = 32;
+    if(temp === 32) {
+        console.log('the temperature is freezing');
+    }
+    
+    // if/else statement example 2 (evaluates false and does not log freezing statement)
+    var temp = 33;
+    if(temp === 32) {
+        console.log('the temperature is freezing');
+    }
+    
+    // if/else statement example 3 (evaluates true or false and logs corresponding statement)
+    var temp = 33;
+    if(temp === 32) {
+        console.log('the temperature is freezing');
+    } else {
+        console.log('the temperature is NOT 32, but still may be freezing');
+    }
+    
+    // if/else if/else statement to provide additional log statement option
+    var temp = 33;
+    if(temp <= 32) {
+        console.log('the temperature is freezing');
+    } else if(temp > 32) {
+        console.log('the temperature is above freezing');
+    } else {
+        console.log('the value of temp must not be a number');
+    }
+    
+    // if/else BREAK example
+    for(var i = 0; i <= 10; i++) {
+        if(i === 5) {
+            break;
+        }
+        console.log(i); // out will be 0 1 2 3 4
+    }
+    
+    // if/else BREAK question, if before IF statement, console log out will be 0 1 2 3 4 5
+    for(var i = 0; i <= 10; i++) {
+        console.log(i); // out will be 0 1 2 3 4 5, logs 5 before the BREAK
+        if(i === 5) {
+            break;
+        }
+        // console.log(i); // out will be 0 1 2 3 4
+    }
+    
+    // test to find if value exists in array
+    var cities = ["Frankfort", "Louisville", "Lexington"];
+    var testCity = "Louisville";
+    for (var i = 0; i < cities.length; i++) {
+        if(cities[i] == testCity) {
+            console.log(testCity + " is found in the city Array!");
+        }
+    }
+    
+    // code to test for array value and report that array value location
+    var cities = ["Frankfort", "Louisville", "Lexington"];
+    var testCity = "Louisville";
+    for (var i = 0; i < cities.length; i++) {
+        if(cities[i] == testCity) {
+            console.log(testCity + " is found in the city Array at index "+ i+ "!");
+        }
+    }
+    
+    // incorporating an ELSE statement into the code in case the value is not found in the array
+    var cities = ["Frankfort", "Louisville", "Lexington"];
+    var testCity = "Bowling Green";
+    for (var i = 0; i < cities.length; i++) {
+        if(cities[i] == testCity) {
+            console.log(testCity + " is found in the city Array at index "+ i+ "!");
+        } else {
+            console.log(testCity + " was not found within the Array at index "+ i+ "!");
+        }
+    }
+    
+    // using the BREAK statement to exit the loop once the desired array value is found
+    var years = [2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015];
+    for(var i = 0; i <= years.length; i++) {
+      if(years[i] == 2012) {
+        break;
+      } else {
+        console.log(years[i]);
+      }
+    }
+    
+    
 </script>
     
 </body>
