@@ -44,7 +44,9 @@
             font-size: 1em;
             color: #001323;
         }
-        /* Additional style rules go here! */
+        .city-name {
+            font-size: 1.25em;
+        }
 
     </style>
 </head>
@@ -60,8 +62,6 @@
     <footer>
         <p>Map authored by Paul Puckett</p>
         <p>Click on the blue markers to reveal Name, Population, and Capital information about three Kenyan cities.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl. Vestibulum commodo imperdiet lacus, sed facilisis erat placerat sit amet. Nulla consequat malesuada neque eget aliquet. Integer non convallis nisl, gravida ultrices ex. Fusce nec vestibulum elit. Sed elementum lectus ipsum, vulputate elementum ex laoreet a. Aenean eu ex varius, varius felis vitae, efficitur nulla. Quisque pretium laoreet ante, in sodales dui vehicula at. Mauris eu sem sapien.
-        </p>
     </footer>
 
     <script>
@@ -98,7 +98,7 @@
         // FOR loop to cycle through cities array, report name/population, and test for capital (true/false)
         for(i=0; i < cities.length; i++) {
             
-            var popup = "<b>"+cities[i]+"</b><br>"
+            var popup = "<b><span class='city-name'>"+cities[i]+"</span></b><br>"
                             +"<b>"+cityComments[i]+"</b><br>"
                             +"<b>Population</b>: "+cityPops[i];
 
