@@ -12,7 +12,213 @@
 
 <script>
 /* JavaScript code goes here! */
+    
+//    // function expression, declaring the function prior to use
+//    function helloMap() {
+//        console.log("Hello Map");
+//    }
+//
+//    helloMap(); // this statement calls or invokes the helloMap() function!
+//    helloMap(); // Console output will be Hello Map
+//    helloMap(); // Console output will be Hello Map
+    
+//    // function expression, example of hoisting, invoking the function before it is declared
+//    helloMap(); // this statement calls or invokes the helloMap() function!
+//
+//    function helloMap() {
+//        console.log("Hello Map");
+//    }
+    
+//    // function expression; declaring the function as a variable, used in 'strict' JS applications
+//    var helloMap = function() {
+//        console.log("Hello Map");
+//    };
+//
+//    helloMap();
+    
+//    // function expression cannot be hoisted, will throw an error, example below
+//    helloMap();  // will throw an error
+//
+//    var helloMap = function() {
+//        console.log("Hello Map");
+//    };
+    
+//    // example of code execution with nested function expression and declaration
+//    function outerFunction(message) {
+//        console.log(message);
+//        var innerFunction = function(message) {
+//            console.log(message);
+//        };
+//        innerFunction("I’m inside!");
+//    }
+//    outerFunction("i'm outside!");
+    
+    // Example of function declaration and passing argument 
+    function saySomething(message) {  // function signature accepts information as a "parameter"
+         console.log(message);
+     }
 
+     saySomething("Hello Map"); // function is called, passing an "argument" with it
+    
+    // Example of function declaration and passing different arguments to same function
+    function saySomething(message) {
+        console.log(message);
+    }
+
+    saySomething("Hello Map");
+    saySomething("Please enter the address you'd like to search for.");
+    
+    // Example of functin declaration and passing different arguments as variables to same function
+    // Note: with multiple function declarations with same name, console log reports latest as actuating function
+    function saySomething(message) {
+        console.log(message);
+    }
+
+    var firstMessage = "Hello Map";
+    saySomething(firstMessage);
+
+    var secondMessage = "Please enter the address you'd like to search for."
+    saySomething(secondMessage);
+    
+    // Example of function declaration and message variable achieving same end.
+    function saySomething(message) {
+        console.log(message);
+    }
+
+    var message = "Hello Map";
+    saySomething(message);
+
+    message = "Please enter the address you'd like to search for."
+    saySomething(message);
+    
+    // Example of function with multiple parameters
+    function calcAreaRect(width,height){
+        var area = width * height;
+        console.log(area);
+    }
+    
+    // Example of function with multiple parameters, applied
+    function calcAreaRect(width,height){
+        var area = width * height;
+        console.log(area);
+    }
+
+    calcAreaRect(40,30);
+    
+    // Example of function declaration with multiple parameters, passed to function as variables, applied
+    function calcAreaRect(width,height){
+        var area = width * height;
+        console.log(area);
+    }
+
+    var width = 40;
+    var height = 30;
+    calcAreaRect(width,height);
+    
+    // Example of function declaration with multiple parameters, passed to function as variables, applied
+    function calcAreaRect(width,height){
+        var area = width * height;
+        console.log(area);
+    }
+
+    var peanutButter = 40;
+    var jelly = 30
+    calcAreaRect(peanutButter,jelly);
+    
+    // Example of a return value with a function declaration
+    function calcAreaRect(width,height){
+        var area = width * height;
+        return area; 
+    }
+
+    var calculatedArea = calcAreaRect(40,30);  // <-- the return value is assigned to calculated Area
+    console.log(calculatedArea);
+    
+    // Example of return value acting as a BREAK in the execution of code and returning an undefined value
+    function sayThings() {
+
+        console.log("thing 1"); // will output to console
+        console.log("thing 2"); // will output to console
+        return;                  // returns an `undefined` value
+        console.log("thing 3"); // will NOT output to console
+    }
+    
+    sayThings(); // calls the function
+    
+    // Example of how to return multiple values from a function declaration; in an array
+    function getMultiValues() {
+        var value1 = 5;
+        var value2 = "iguana";
+        return [value1, value2];
+    }
+
+    var values = getMultiValues();
+    console.log(values[0]); // output is 5
+    console.log(values[1]); // output is "iguana"
+
+//    // Example of function scope. console.log(greeting) is defined within sayHello and will throw error outside that function
+//    function sayHello (){
+//        var greeting = "Hi, I’m a web mapper.";
+//        console.log(greeting);
+//    }
+//
+//    sayHello(); // function call
+//    console.log(greeting); // throws an error
+    
+//    // Apparently web mappers are city mice and cartographers are country mice
+//    function sayHello(){
+//        var greeting = "Hi, I’m a web mapper."; // variable defined within the function scope
+//        console.log(greeting); // output is "Hi, I’m a web mapper"
+//    }
+//
+//    sayHello();  // output is "Hi, I’m a web mapper"
+//
+//    var greeting = "Howdy, I'm a cartographer"; // variable defined within the global scope
+//    console.log(greeting); // output is "Howdy, I'm a cartographer"
+    
+    // Defining a variable outside scope that exists within the scope of a function, then actuating it by invoking the function
+    function sayHello(){
+        console.log(greeting); 
+    }
+
+    var greeting = "Howdy, I'm a cartographer"; // variable defined within the global scope
+
+    sayHello();  // output is "Howdy, I'm a cartographer"
+    
+    // Example of an outside function affecting the code within another function that has already been defined
+    // we have three numbers
+    var myNums = [1, 2, 3];
+
+    // we want to log them to console
+    // so we call a function and send them into that function
+    logNumsToConsole(myNums);
+
+    function logNumsToConsole(nums){
+      // function accepts that array as nums
+
+      //for all of our numbers stored within nums array
+      for(var i=0; i < nums.length; i++){
+        // loop through each, i is a counter for each loop
+
+        // before we log them, we want to double them
+        var doubleNumValue = doubleNum(nums[i]); // i here access each one
+
+        // THE NEXT LINE DOESN'T HAPPEN UNTIL ... the code within doubleNum runs!!!
+
+        // now we log them
+        console.log(doubleNumValue); // output is 2 4 6
+
+      }  // end for loop
+
+    }  // end logNumsToConsole
+
+    function doubleNum(num){
+
+      // for each number, we double it and return the value
+      return num * 2;
+
+    } // end doubleNum
+    
 </script>
     
 </body>
