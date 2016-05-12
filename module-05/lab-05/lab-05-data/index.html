@@ -63,7 +63,7 @@
     <div id='map'></div>
     <button id='map-cities'>Map Cities</button>
     <footer>
-        <p>Map authored by YOUR NAME</p>
+        <p>Map authored by Paul Puckett</p>
         <p>Additional information about the data and map goes here.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl.
         </p>
@@ -90,10 +90,21 @@
     // adds these tiles to the map
     map.addLayer(tiles);
     
-//    var cities = // write 3 city names as Strings within an array
-//    var cityCoords = // write a two-dimensional array of the coordinates for each city
-//    var cityPops = // write the populations of the 3 cities as Numbers within an array;
-//    var cityAreas = // write the areas of the 3 cities as Numbers within an array;
+    // write 3 city names as Strings within an array
+    var cities = ["Honolulu", "Windhoek", "Darjeeling"];
+    
+    // write a two-dimensional array of the coordinates for each city
+    var cityCoords = [
+        [21.3, -157.816667],
+        [-22.57, 17.083611],
+        [27.05, 88.266667]
+    ]
+    
+    // write the populations of the 3 cities as Numbers within an array;
+    var cityPops = [337256, 325858, 132016];
+    
+    // write the areas of the 3 cities as Numbers within an array;
+    var cityAreas = [68.4, 1982, 4.08];
         
     var button = document.getElementById("map-cities");
     
