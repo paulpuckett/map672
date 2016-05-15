@@ -56,16 +56,16 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Population Densities</h1>
+        <h2>Honolulu, Windhoek, and Darjeeling</h2>
     </header>
 
     <div id='map'></div>
     <button id='map-cities'>Map Cities</button>
     <footer>
         <p>Map authored by Paul Puckett</p>
-        <p>Additional information about the data and map goes here.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl.
+        <p>Click the 'Map Cities' button, input a value in miles or km, and click on the markers for population             densities of the cities mapped</p>
+        <p>Population density is measured by dividing the total population by the total area. This map allows users to input either square miles (miles) or square kilometers (km) in order to learn what the population density is for three world cities.
         </p>
     </footer>
 
@@ -101,30 +101,65 @@
     ]
     
     // write the populations of the 3 cities as Numbers within an array;
-    var cityPops = [337256, 325858, 132016];
+    var cityPops = [337256, 325858, 107197];
     
     // write the areas of the 3 cities as Numbers within an array;
-    var cityAreas = [68.4, 1982, 4.08];
+    var cityAreas = [68.4, 249, 4.08]; // areas are sq miles
         
     var button = document.getElementById("map-cities");
     
     button.addEventListener("click", function() {
          
-        var units = prompt('Enter the units for calculating density', 'Enter "miles" or "km"');
+        // do/while statement to reprompt user if they do not input either miles or km
+        do {   
+
+            var units = prompt('Enter the units for calculating density', 'Enter "miles" or "km"');
+
+        } while (units != "miles" && units != "km")
         
-        console.log(units);
+        // console.log(units);
         
         // call a function named mapCities, and send the units variable as an argument
+        mapCities(units);
         
     }); // addEventListener callback function ends here
     
     
     // write a function here named mapCities so that it accepts units as a parameter
+    function mapCities(units){
+        
+        for (i=0; i < cities.length; i++) {
+            var densityValue = calcPopDensity(cityPops[i], cityAreas[i], units);
+            var densityValue = densityValue.toFixed(0);
+            var popup = "<b>"+cities[i]+":"+"</b><br>"
+            +"Has a population density of<br>"
+            +densityValue+" people per square "+units;
+            
+            L.marker(cityCoords[i]).addTo(map)
+                .bindPopup(popup);
+        }
+    }
     
     
     // write a function named calcPopDensity here so that it accepts a single city's
     // population, area, and the value for units determined by the user
-
+    function calcPopDensity (a, b, c) {
+        
+        var pop = a;
+        var area = b;
+        var units = c;
+        if (units=="miles") {
+            var density = (pop / area);
+            return density;
+        } else {
+            if (units=="km");
+            var kmarea = (area * 2.589);
+            var kmdensity = (pop / kmarea);
+            return kmdensity;
+        }
+                
+    }
+            
     
     
     
