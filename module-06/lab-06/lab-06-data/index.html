@@ -88,6 +88,8 @@
         
         // Begin writing/modifying code for Lab 06 here
         
+        // Create cities array containing three objects, one for each city, with a nested properties object 
+        
         var cities = [
              {
                  name: "Lexington",
@@ -125,6 +127,8 @@
 //            console.log(cities[i]);
 //        }
         
+        // After cities object array is created, use a FOR loop to populate variables and add markers
+        
         for (var i=0; i<cities.length; i++) {
             
             var props = cities[i].properties;
@@ -133,8 +137,10 @@
             
             L.marker(props.coordinates).addTo(map).bindPopup(popup);
             
-            console.log("The population of "+cities[i].name+" is "+props.population);
+            // console.log("The population of "+cities[i].name+" is "+props.population);
         };
+        
+        // Declare function to establish color and return popup values
         
         function buildPopup (logo, name, school, pop, state) {
             
