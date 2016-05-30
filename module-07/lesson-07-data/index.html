@@ -3,9 +3,10 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lesson 07 Template</title>
+    <title>Lesson 7 Worksheet</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
+    <!-- Load the leaflet -->
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
@@ -49,22 +50,122 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>Lesson 7</h1>
+        <h2>Leaflet worksheet</h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl.
+        <p>Map authored by Paul Puckett</p>
+        <p>An experiment page to play with Leaflet and contemplate pork chile</p>
+        <p>Paperback writer Dear Sir or Madam, will you read my book? It took me years to write, will you take a look? It's based on a novel by a man named Lear And I need a job, so I want to be a paperback writer Paperback writer It's the dirty story of a dirty man And his clinging wife doesn't understand His son is working for the Daily Mail It's a steady job but he wants to be a paperback writer Paperback writer Paperback writer It's a thousand pages, give or take a few I'll be writing more in a week or two I can make it longer if you like the style
+I can change it round and I want to be a paperback writer Paperback writer If you really like it you can have the rights It could make a million for you overnight If you must return it, you can send it here But I need a break and I want to be a paperback writer Paperback writer Paperback writer Paperback writer, paperback writer Paperback writer, paperback writer Paperback writer, paperback writer Paperback writer, paperback writer (fade out) 
         </p>
     </footer>
 
     <script>
 
       // build your Leaflet map here!
+        
+      // Establish variable denoting map center to be used below
+//        var mapCenter = L.latLng(38.0489,-96.5025);
+        
+//        Create variables containing L.latlng methods to calculate distance via another method
+//        var mapCenter = L.latLng(38.0489,-96.5025);
+//        var otherCity = L.latLng(38.1489,-96.5125);
+//        var distance = mapCenter.distanceTo(otherCity);
+//        console.log(distance); // will output distance between cities in meters
+        
+        // create an object, options, to be applied in the L.map() method call        
+//        var options = {
+//            center: mapCenter,
+//            zoom: 4,
+//            minZoom: 4,
+//            maxZoom: 7,
+//            dragging: false,
+//            zoomControl: false
+//          }
+        
+      // initialize the map on the "map" div with a given center and zoom
+      // create a variable called map that is a leaflet method; the map method which takes arguments
+        var map = L.map('map');
+        map.setView([40.769349,-111.902547], 14);
+        
+      // create a variable called tiles that is a leaflet method; the tilelayer method which receives arguments
+        var tiles = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            });    
+      // using dot notation to call a method and apply it to the map variable
+        map.addLayer(tiles);
+        
+      // using a user event to produce a console logging of lat and lng
+//        map.on('click', function(e) {
+//            console.log(e.latlng);
+//        });
+//        
+//        var center = map.getCenter();
+//        console.log(center); // returns a LatLng object
+//        var zoom = map.getZoom();
+//        console.log(zoom); // returns a Number
+//        var bounds = map.getBounds();
+//        console.log(bounds); // returns a LatLngBounds object
+        
+//        var redIguanaLocation = L.latLng(40.7718,-111.9124);
+//        var redIguanaMarker = L.marker(redIguanaLocation, {
+//            draggable: true   
+//        });
+//        redIguanaMarker.addTo(map);
+//        redIguanaMarker.on('drag', function(e) {
+//                console.log(e.target.getLatLng());
+//        });
+//        redIguanaMarker.bindPopup("Best Mexican food in Salt Lake City!");
+        
+        // Create iguanaRestaurants layer, to which red and blue will be added layer
+        var iguanaRestaurants = L.layerGroup();
+        // Create SVG options for red iguana circle
+        var redIguanaOptions = {
+            color: 'red',
+            fillColor: 'red'
+        };
+        // Create SVG options for blue iguana circle
+        var blueIguanaOptions = {
+            color: '#03f',
+            fillColor: '#03f'
+        };
+        // Using leaflet circle method, instantiate red iguana circle using latlng, radius, and options extension
+        var redIguana = L.circle([40.7718,-111.9124], 400, redIguanaOptions);
+        // Seems redundant at first, as it is in the options, but .color will be used to return color to original
+        redIguana.color = 'red';
+        // Add the red iguana circle to the iguana restaurants layer
+        redIguana.addTo(iguanaRestaurants);
+        // Repeat process for blue iguana, same as red
+        var blueIguana = L.circle([40.7657, -111.8930], 300, blueIguanaOptions);
+        // Seems redundant at first, as it is in the options, but .color will be used to return color to original
+        blueIguana.color = 'blue';
+        // Add blue iguana to the iguana restaurants layer with the red
+        blueIguana.addTo(iguanaRestaurants);
+        // Add both restaurants to the map with one command, as they are both on same iguanaRestaurants layer
+        iguanaRestaurants.addTo(map);
+
+        // Map "listens" for cursor to cross circle, if so, iterates through iguanaRestaurants to find layer and turns it yellow, then listens for mouse to leave circle (mouseout), and uses .color to return circle to original value.
+        iguanaRestaurants.eachLayer(function(layer) {
+            layer.on('mouseover', function(e) {
+                e.target.setStyle({
+                    color: 'yellow',
+                    fillColor: 'yellow'
+                });
+            });
+            layer.on('mouseout', function(e) {
+                if(e.target.color == 'red') {
+                    e.target.setStyle(redIguanaOptions);
+                } else if (e.target.color == 'blue') {
+                        e.target.setStyle(blueIguanaOptions);      
+                }
+            });
+        });
+
                   
     </script>
     
