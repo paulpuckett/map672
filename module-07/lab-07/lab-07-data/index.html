@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 07 Starter Template</title>
+    <title>L'iguane rouge</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -52,16 +52,16 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>MAP 672</h1>
+        <h2>Lab 07-The Red Iguana!</h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis urna magna, maximus nec laoreet sit amet, dictum ultricies nibh. Ut id auctor lacus. Nam a dolor et justo luctus luctus. Duis a elit eget risus dictum vehicula id eu elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed sed enim nisl. Vestibulum commodo imperdiet lacus, sed facilisis erat placerat sit amet. Nulla consequat malesuada neque eget aliquet. Integer non convallis nisl, gravida ultrices ex. Fusce nec vestibulum elit. Sed elementum lectus ipsum, vulputate elementum ex laoreet a. Aenean eu ex varius, varius felis vitae, efficitur nulla. Quisque pretium laoreet ante, in sodales dui vehicula at. Mauris eu sem sapien.
+        <p>Map authored by Paul Puckett</p>
+        <p>Ready Player 1? Click the map create a marker, and click the marker to find out how far, in kilometers, you are from the Red Iguana. Drag the marker and click again to see the new distance, or click another location to create another marker.</p>
+        <p>Mon Dieu! The western skies, they are so beautiful at night.  But not so beautiful, I think, as the pork chile at the Red Iguana! So tempting, so delectable; could this pork chile be served by an iguana of any other color? <b>NON!</b> Click the map monsieur, click again mademoiselle, click as many times as is necessary to find how far you remain from the intoxicating aroma, the decadent taste; oh bon vivant, you will find no greater luxury! With the light as your guide, ply that western trail to the city of The Great Salt Lake, to the city of...<i><a href=http://www.rediguana.com/>The Red Iguana!</a></i>
         </p>
     </footer>
 
@@ -74,6 +74,18 @@
     
     var map = L.map('map', options);
                 
+    // Copied in tile information from Leaflet/Github
+    var tiles = L.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default/{time}/{tilematrixset}{maxZoom}/{z}/{y}/{x}.{format}', {
+        attribution: 'Imagery provided by services from the Global Imagery Browse Services (GIBS), operated by the NASA/GSFC/Earth Science Data and Information System (<a href="https://earthdata.nasa.gov">ESDIS</a>) with funding provided by NASA/HQ.',
+        bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
+        minZoom: 1,
+        maxZoom: 8,
+        format: 'jpg',
+        time: '',
+        tilematrixset: 'GoogleMapsCompatible_Level'
+    });
+    map.addLayer(tiles);
+        
     var redIguana = L.latLng(40.7718,-111.9124);
         
     L.marker(redIguana, {
@@ -83,12 +95,61 @@
         })
     }).addTo(map);
         
+    // Copied in a red icon from Leaflet, in honor of the red iguana
+    var redIcon = new L.Icon({
+      iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+        
+    // Listen for a click event
     map.on('click', function(e){
         
-        // output is o.LatLng {lat: 40.863679665481676, lng: -114.57847595214842}  
-        console.log(e.latlng); 
+        // Assign the laglng of the click event to a variable
+        var clickLocation = e.latlng;
+        // Use the clickLocation variable to define the location of a draggable, red marker
+        var clickMarker = L.marker(clickLocation, {
+            draggable: true,
+            icon: redIcon
+        });
+        // Calculate distance from the Red Iguana to the clicked location
+        var distance = redIguana.distanceTo(clickLocation);
+        // Convert the distance to kilometers by dividing by 1,000
+        distance = (distance/1000);
+        // Round the result to two places
+        distance = distance.toFixed(2);
+        // Add the marker to the map
+        clickMarker.addTo(map);
+        // Bind popup material to the marker
+        clickMarker.bindPopup("You are "+distance+" km from The Red Iguana!");
+        // Listen for a drag event after the marker is established
+        clickMarker.on('dragend', function(e) {
+            // Redefine the click location to the end of the drag
+            var newClickLocation = e.target._latlng;
+            // Recalculate distance to the Red Iguana
+            var newDistance = redIguana.distanceTo(newClickLocation);
+            // Convert the new distance to kilometers by dividing by 1,000
+            newDistance = (newDistance/1000);
+            // Round the new result to two places
+            newDistance = newDistance.toFixed(2);
+            // Bind the redefined popup material to the marker
+            clickMarker.bindPopup("You are "+newDistance+" km from The Red Iguana!");
+        });
+        
         
     });
+        
+        
+        
+    
+        
+
+    
+    
+            
                   
     </script>
     
