@@ -44,6 +44,9 @@
             font-size: 1em;
             color: #001323;
         }
+        p a {
+            font-style: italic;
+        }
         /* Additional style rules go here! */
         
 
@@ -61,7 +64,7 @@
     <footer>
         <p>Map authored by Paul Puckett</p>
         <p>Ready Player 1? Click the map create a marker, and click the marker to find out how far, in kilometers, you are from the Red Iguana. Drag the marker and click again to see the new distance, or click another location to create another marker.</p>
-        <p>Mon Dieu! The western skies, they are so beautiful at night.  But not so beautiful, I think, as the pork chile at the Red Iguana! So tempting, so delectable; could this pork chile be served by an iguana of any other color? <b>NON!</b> Click the map monsieur, click again mademoiselle, click as many times as is necessary to find how far you remain from the intoxicating aroma, the decadent taste; oh bon vivant, you will find no greater luxury! With the light as your guide, ply that western trail to the city of The Great Salt Lake, to the city of...<i><a href=http://www.rediguana.com/>The Red Iguana!</a></i>
+        <p>Mon Dieu! The western skies, they are so beautiful at night.  But not so beautiful, I think, as the pork chile at the Red Iguana! So tempting, so delectable; could this pork chile be served by an iguana of any other color? <b>NON!</b> Click the map monsieur, click again mademoiselle, click as many times as is necessary to find how far you remain from the intoxicating aroma, the decadent taste; oh bon vivant, you will find no greater luxury! With the light as your guide, ply that western trail to the city of The Great Salt Lake, to the city of...<a href=http://www.rediguana.com/ alt="The Red Iguana"></a>
         </p>
     </footer>
 
@@ -110,47 +113,50 @@
         
         // Assign the laglng of the click event to a variable
         var clickLocation = e.latlng;
+        
         // Use the clickLocation variable to define the location of a draggable, red marker
         var clickMarker = L.marker(clickLocation, {
             draggable: true,
             icon: redIcon
         });
+        
         // Calculate distance from the Red Iguana to the clicked location
         var distance = redIguana.distanceTo(clickLocation);
+        
         // Convert the distance to kilometers by dividing by 1,000
         distance = (distance/1000);
+        
         // Round the result to two places
         distance = distance.toFixed(2);
+        
         // Add the marker to the map
         clickMarker.addTo(map);
-        // Bind popup material to the marker
-        clickMarker.bindPopup("You are "+distance+" km from The Red Iguana!");
+        
+        // Bind popup material to the marker and open
+        clickMarker.bindPopup("You are "+distance+" km from The Red Iguana!").openPopup();
+        
         // Listen for a drag event after the marker is established
         clickMarker.on('dragend', function(e) {
+            
             // Redefine the click location to the end of the drag
             var newClickLocation = e.target._latlng;
+            
             // Recalculate distance to the Red Iguana
             var newDistance = redIguana.distanceTo(newClickLocation);
+            
             // Convert the new distance to kilometers by dividing by 1,000
             newDistance = (newDistance/1000);
+            
             // Round the new result to two places
             newDistance = newDistance.toFixed(2);
+            
             // Bind the redefined popup material to the marker
-            clickMarker.bindPopup("You are "+newDistance+" km from The Red Iguana!");
+            clickMarker.bindPopup("You are "+newDistance+" km from The Red Iguana!").openPopup();
         });
         
         
     });
-        
-        
-        
-    
-        
-
-    
-    
-            
-                  
+                     
     </script>
     
 </body>
