@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset=utf-8 />
+    <title>GEOJSON Ahoy!</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: whitesmoke;
+            font-family: Lato, sans-serif;
+            color: #0D0000;
+        }
+        header {
+            padding: 6px 10%;
+        }
+        h1 {
+            display: inline-block;
+            margin-right: 20px;
+            color: #001323;
+        }
+        h2 {
+            display: inline-block;
+            color: #001323;
+        }
+        #map {
+            width: 80%;
+            height: 540px;
+            margin: 10px auto;
+        }
+        footer {
+            padding: 6px 10%;
+            width: 80%;
+        }
+        p {
+            font-size: 1em;
+            color: #001323;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>MAP 672</h1>
+        <h2>Lesson 08</h2>
+    </header>
+
+    <div id='map'></div>
+
+    <footer>
+        <p>Map authored by Paul Puckett</p>
+        <p>A lesson in GeoJSON.</p>
+    </footer>
+
+    <script>
+
+      // build your Leaflet map here!
+        var map = L.map('map', {
+           center: [58.73, 25.67], // centered in Estonia
+           zoom: 7
+        });
+
+        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        });  
+        tiles.addTo(map);
+        
+        var places = {
+          "type": "FeatureCollection",
+          "features": [
+            {
+              "type": "Feature",
+              "properties": {
+                "marker-color": "#7e7e7e",
+                "marker-size": "medium",
+                "marker-symbol": "",
+                "name": "tallinn",
+                "size": 159
+              },
+              "geometry": {
+                "type": "Point",
+                "coordinates": [
+                  24.7247314453125,
+                  59.43110957970815
+                ]
+              }
+            },
+            {
+              "type": "Feature",
+              "properties": {
+                "marker-color": "#7e7e7e",
+                "marker-size": "medium",
+                "marker-symbol": "",
+                "name": "Haapsalu",
+                "size": 11
+              },
+              "geometry": {
+                "type": "Point",
+                "coordinates": [
+                  23.5491943359375,
+                  58.93583884471029
+                ]
+              }
+            },
+            {
+              "type": "Feature",
+              "properties": {
+                "marker-color": "#7e7e7e",
+                "marker-size": "medium",
+                "marker-symbol": "",
+                "name": "Parnu",
+                "size": 32
+              },
+              "geometry": {
+                "type": "Point",
+                "coordinates": [
+                  24.5159912109375,
+                  58.404589750868105
+                ]
+              }
+            },
+            {
+              "type": "Feature",
+              "properties": {
+                "marker-color": "#7e7e7e",
+                "marker-size": "medium",
+                "marker-symbol": "",
+                "name": "Tartu",
+                "size": 39
+              },
+              "geometry": {
+                "type": "Point",
+                "coordinates": [
+                  26.817626953125,
+                  58.36139381804461
+                ]
+              }
+            }
+          ]
+        }
+        
+        var placesLeaflet = L.geoJson(places, {
+            pointToLayer : function(feature, latlng) {
+                return L.circle(latlng, feature.properties.size * 100);
+            }
+        }).addTo(map);
+                  
+    </script>
+    
+</body>
+
+</html>

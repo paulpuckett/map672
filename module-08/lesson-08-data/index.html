@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lesson 08 Template</title>
+    <title>GEOJSON Ahoy!</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -49,20 +49,56 @@
 
 <body>
     <header>
-        <h1>Map Title</h1>
-        <h2>Map Subtitle</h2>
+        <h1>MAP 672</h1>
+        <h2>Lesson 08-Part 2: Wind Farms of the Great Plains</h2>
     </header>
 
     <div id='map'></div>
 
     <footer>
-        <p>Map authored by YOUR NAME</p>
-        <p>Additional information about the data and map goes here.</p>
+        <p>Map authored by Paul Puckett</p>
+        <p>For the purposes of this map, I defined the 'Great Plains' region of the United States as those areas between 95&#176; W and 105&#176; W Longitude in order to observe the spatial distribution of wind-powered electric in the region.</p>
     </footer>
 
+    <script src="power-plants.js"`></script>
     <script>
 
       // build your Leaflet map here!
+        var map = L.map('map', {
+            center: [36,-94],
+            zoom: 4,
+        });
+
+        var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
+        });  
+        tiles.addTo(map);
+        
+//        console.log(plants);
+        
+        // Assign plants info to pointToLayer/circleMarker with properties and filtering for longitude/wind power
+        L.geoJson(plants, {
+            pointToLayer: function(feature,latlng) {
+                    return L.circleMarker(latlng, {
+                        color: 'orange',
+                        weight: 1,
+                        fillColor: 'yellow',
+                        fillOpacity: .8,
+                        radius: 2
+                    });   
+            },
+            filter : function(feature, layer) {
+                if(feature.geometry.coordinates[0] < -95 &&
+                   feature.geometry.coordinates[0] > -105 &&
+                    feature.properties.fuel_source.Wind){
+                    return feature;   
+                }
+            }
+        }).addTo(map);
+        
+        
                   
     </script>
     
