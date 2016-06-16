@@ -101,17 +101,17 @@
                     layer.setStyle({
                         fillColor: 'cyan'
                     });
-                    layer.bindPopup(
-                        "<b>Plant Name: "+feature.properties.plant_name+"</b>"+
-                        "<br><b>Total Capacity: </b>"+feature.properties.capacity_mw+" MW"+
-                        "<br><b>Coal Capacity: </b>"+feature.properties.fuel_source.Coal+" MW"+
-                        "<br><b>Natural Gas Capacity: </b>"+feature.properties.fuel_source["Natural Gas"]+" MW");
                 });
                 layer.on('mouseout', function() {
                     layer.setStyle({
                         fillColor: 'purple'
                     });
                 });
+                layer.bindPopup(
+                "<b>Plant Name: "+feature.properties.plant_name+"</b>"+
+                "<br><b>Total Capacity: </b>"+feature.properties.capacity_mw+" MW"+
+                "<br><b>Coal Capacity: </b>"+feature.properties.fuel_source.Coal+" MW"+
+                "<br><b>Natural Gas Capacity: </b>"+feature.properties.fuel_source["Natural Gas"]+" MW");
             }
         }).addTo(map);
         
