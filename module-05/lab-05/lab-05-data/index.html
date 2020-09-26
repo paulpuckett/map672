@@ -3,7 +3,7 @@
 
 <head>
     <meta charset=utf-8 />
-    <title>Lab 05 Starter Template</title>
+    <title>Population Densities</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
@@ -129,11 +129,11 @@
     function mapCities(units){
         
         for (i=0; i < cities.length; i++) {
-            var densityValue = calcPopDensity(cityPops[i], cityAreas[i], units);
-            var densityValue = densityValue.toFixed(0);
+            var densityValue = calcPopDensity(cityPops[i], cityAreas[i], units).toFixed(0);
+            
             var popup = "<b>"+cities[i]+":"+"</b><br>"
-            +"Has a population density of<br>"
-            +densityValue+" people per square "+units;
+                +"Has a population density of<br>"
+                +densityValue+" people per square "+units;
             
             L.marker(cityCoords[i]).addTo(map)
                 .bindPopup(popup);
@@ -143,19 +143,13 @@
     
     // write a function named calcPopDensity here so that it accepts a single city's
     // population, area, and the value for units determined by the user
-    function calcPopDensity (a, b, c) {
+    function calcPopDensity (pop, area, units) {
         
-        var pop = a;
-        var area = b;
-        var units = c;
         if (units=="miles") {
-            var density = (pop / area);
-            return density;
-        } else {
-            if (units=="km");
-            var kmarea = (area * 2.589);
-            var kmdensity = (pop / kmarea);
-            return kmdensity;
+            return pop / area;
+           
+        } else if (units=="km") {
+            return pop/(area * 2.589);
         }
                 
     }
